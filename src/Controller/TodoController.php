@@ -41,6 +41,24 @@ class TodoController extends AbstractController
     }
 
     /**
+     * @Route("/todo/remove/{id}", name="todo_remove")
+     * @param int $id
+     * @return Response
+     */
+    public function remove($id): Response
+    {
+        try {
+            $todo = $this->todoRepository->find($id);
+            $this->entityManager->remove($todo);
+            $this->entityManager->flush();
+
+            return $this->json(['result' => true]);
+        } catch (Throwable $e) {
+            return $this->json(['result' => false]);
+        }
+    }
+
+    /**
      * @Route("/todo/create", name="todo_create")
      * @param Request $request
      * @return Response
@@ -60,9 +78,7 @@ class TodoController extends AbstractController
                 'result' => true
             ]);
         } catch (Throwable $e) {
-            return $this->json([
-                'result' => false
-            ]);
+            return $this->json(['result' => false]);
         }
     }
 }
