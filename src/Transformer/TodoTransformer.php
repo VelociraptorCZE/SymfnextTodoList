@@ -12,7 +12,7 @@ class TodoTransformer
         return [
             'id' => $todo->getId(),
             'description' => $todo->getDescription(),
-            'createdAt' => $todo->getCreatedAt()->format('j. n. Y')
+            'createdAt' => $todo->getCreatedAt()->format('j. n. Y H:i')
         ];
     }
 }

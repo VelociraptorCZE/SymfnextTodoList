@@ -42,7 +42,7 @@ class TodoController extends AbstractController
 
     /**
      * @Route("/todo/remove/{id}", name="todo_remove")
-     * @param int $id
+     * @param mixed $id
      * @return Response
      */
     public function remove($id): Response

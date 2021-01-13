@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -25,6 +26,8 @@ class TodoRepository extends ServiceEntityRepository
 
     public function findAllAsArray(): array
     {
-        return array_map(fn (Todo $todo): array => $this->todoTransformer->transform($todo), $this->findAll());
+        $todos = $this->findBy([], ['createdAt' => 'desc']);
+
+        return array_map(fn (Todo $todo): array => $this->todoTransformer->transform($todo), $todos);
     }
 }
